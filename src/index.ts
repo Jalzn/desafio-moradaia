@@ -1,27 +1,23 @@
 import express from 'express'
-import type { NextFunction, Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import { saqueSchema } from './schemas'
+import { AtmService } from './services/atm.service'
+import { AtmController } from './controllers/atm.controller'
+import middlewares from './middlewares'
 
 const app = express()
 const port = 5000
 
+const atmService = new AtmService()
+const atmController = new AtmController(atmService)
+
 app.use(express.json())
 
-app.post("/api/saque", (req: Request, res: Response) => {
-	const validationErrors = saqueSchema.validate(req.body)
+app.post("/api/saque",
+	middlewares.validate(saqueSchema),
+	(req: Request, res: Response) => atmController.saque(req, res))
 
-	if (validationErrors) {
-		return res.status(422).json(validationErrors)
-	}
-
-	throw new Error("Endpoint not implemented.")
-})
-
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-	return res.status(500).json({
-		message: err.message
-	})
-})
+app.use(middlewares.error())
 
 app.listen(port, () => {
 	console.log(`[Server] Listening on ${port}...`)
