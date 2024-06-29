@@ -1,3 +1,5 @@
+import { ErrInvalidAmout } from "@/errors"
+
 type SaqueNotas = {
 	100: number,
 	50: number,
@@ -65,7 +67,7 @@ export class AtmService {
 
 		// If there is no notas for this amount throws error
 		if (!result) {
-			throw new Error("Failed to saque this amount.")
+			throw ErrInvalidAmout
 		}
 
 		const notas: SaqueNotas = {

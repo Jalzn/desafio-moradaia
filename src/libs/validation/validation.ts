@@ -45,7 +45,7 @@ export class SchemaNode {
 	number() {
 		const fn: ValidationFunction = (value) => {
 			if (typeof value !== "number") {
-				return [false, "input is not a number."]
+				return [false, "Valor não é um número."]
 			}
 			return [true, ""]
 		}
@@ -58,7 +58,7 @@ export class SchemaNode {
 	equals(expected: number) {
 		const fn: ValidationFunction = (val) => {
 			if (val !== expected) {
-				return [false, `input is not equals ${expected}.`]
+				return [false, `Valor não é igual a ${expected}.`]
 			}
 			return [true, ""]
 		}
