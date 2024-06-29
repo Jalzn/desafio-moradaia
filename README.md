@@ -54,6 +54,33 @@ conforme os requisitos específicos da API, retornando um registro de erros deta
 em caso de falha na validação. Essa abordagem melhorou a robustez da validação de dados
 e simplificou expansão futura da lógica de validação no projeto.
 
+### Eficiência na Distribuição de Cédulas
+
+O desafio consistia em calcular a distribuição corretas das cédulas de forma
+que retorne a menor quantidade possiveis de cédulas. Para implementar esse algoritimo,
+foi preciso primeiramente entender a natureza do problema.
+
+Podemos imaginar que para cada nota adicionada ao resultado, quebramos esse problema
+em subproblemas. Como podemos ver no exemplo abaixo.
+```
+min(20) = 10 + min(10)
+```
+Onde, `min()` é uma função que retorna a menor quantiade de cedulas para um certo valor. Dessa forma,
+garantimos a robustez da solução sempre gerarando o caso ótimo.
+
+Porém um dos problemas de implementar essa solução de modo recursiva é a sua complexidade computacional.
+Podemos imaginar que cada chamada recursiva irá criar no final uma arvore. Por conta disso, temos
+uma complexidade de `O(2^n)`. Para numeros relativamente pequenos de saque, por exemplo 380, teremos 2^380 operações
+oque torna esse algoritimo inviável.
+
+Uma forma eficiente de contornar esse problema é utilizando programação dinamica.
+De forma simplificada, salvamos resultados previamentes calculados em uma tabela.
+Sempre que formos calcular o `min(n)` quando essa função já teve o valor calculado,
+iremos substituir pelo valor na tabela. Assim diminuimos drasticamente a complexidade computacional
+para `O(M*K)` onde K é o numero de notas e M é valor a ser sacado.
+
+O resultado final do algoritimo permitiu obter uma robustez na resposta e uma velocidade considerável no tempo
+de execução.
 
 ## Instalação
 Certifique-se de ter o Node.js e npm instalados na sua máquina.
