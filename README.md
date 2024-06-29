@@ -103,6 +103,18 @@ npm start
 ```
 O servidor estará acessível em `http://localhost:5000`.
 
+## Executando o Projeto via Docker
+Para iniciar o servidor a partir de um container
+```
+docker compose up -d
+```
+O servidor estará acessível em `http://localhost:5000`.
+
+Para fechar o container
+```
+docker compose down
+```
+
 ## Testes
 Para executar os testes automatizados:
 ```

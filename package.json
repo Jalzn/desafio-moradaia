@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+		"build": "npx tsc && tsc-alias",
     "start": "npx tsc && tsc-alias && node ./dist/index.js",
     "test": "jest"
   },
